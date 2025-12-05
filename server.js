@@ -8,6 +8,7 @@ import passport from "passport";
 import Authrouter from "./src/routes/authRoutes.js";
 import ProductRouter from "./src/products/productRoutes.js";
 // import loggerMiddleware from "./middlewares/logger.middleware.js";
+import cartRouter from "./src/cart/cartRouter.js";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -66,6 +67,7 @@ mongoose
 // ✅ Routes
 app.use("/api/products", ProductRouter);
 app.use("/api/auth", Authrouter);
+app.use("/api/cart", cartRouter);
 
 // ✅ Test route
 app.get("/", (req, res) => {

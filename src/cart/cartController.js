@@ -1,10 +1,9 @@
 import Cart from "../models/cartModel.js";
 
 export const addToCart = async (req, res) => {
-  // console.log("Received cart data:", req.body);
-  // console.log("User from token:", req.user);
-  const { userId, product, quantity } = req.body;
 
+  const { userId, product, quantity } = req.body;
+  
   if (!userId || !product) 
     return res.status(400).json({ success: false, msg: "User ID required" });
 
@@ -28,7 +27,12 @@ export const addToCart = async (req, res) => {
   }
 
   // CHECK IF PRODUCT EXISTS
-  const exists = cart.items.find((i) => i.productId === product._id);
+  const exists = cart.items.find(
+    (i) => i.productId.toString() === product._id.toString()
+  );
+
+  // const exists = cart.items.find((i) => i.productId === product._id);
+
 
   if (exists) {
     exists.quantity += quantity || 1;
